@@ -41,5 +41,11 @@ await connectDB();
 app.use("/api/auth", userRouter);
 app.use("/api/messages", messageRouter);
 app.use("/api/status", (req, res) => res.send("Server Is Alive"));
+
+if(process.env.NODE_ENV !== "production"){
 const PORT = process.env.PORT;
 server.listen(PORT, () => console.log("server listen on " + PORT));
+}
+
+//export for vercel
+export default server;
