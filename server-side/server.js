@@ -13,8 +13,8 @@ const server = http.createServer(app);
 //initialize socket io server
 export const io = new Server(server, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
+    origin: "https://chat-app-wo7i.vercel.app",
+    methods: ["GET", "POST", "OPTIONS"],
     credentials: true,
   },
 });
