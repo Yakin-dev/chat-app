@@ -13,8 +13,7 @@ const server = http.createServer(app);
 //initialize socket io server
 export const io = new Server(server, {
   cors: {
-    origin: "https://chat-app-wo7i.vercel.app",
-    methods: ["GET", "POST", "OPTIONS"],
+    origin: "*",
     credentials: true,
   },
 });
@@ -34,7 +33,9 @@ io.on("connection", (socket) => {
 
 //Middleware Setup
 app.use(express.json({ limit: "4mb" }));
-app.use(cors());
+app.use(
+  cors()
+);
 //Database Connection
 await connectDB();
 //Routes setup
@@ -42,10 +43,10 @@ app.use("/api/auth", userRouter);
 app.use("/api/messages", messageRouter);
 app.use("/api/status", (req, res) => res.send("Server Is Alive"));
 
-if(process.env.NODE_ENV !== "production"){
+
 const PORT = process.env.PORT;
 server.listen(PORT, () => console.log("server listen on " + PORT));
-}
+
 
 //export for vercel
 export default server;
